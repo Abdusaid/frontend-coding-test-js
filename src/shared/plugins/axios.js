@@ -15,8 +15,8 @@ const config = {
 const axiosInstance = axios.create(config)
 
 axiosInstance.interceptors.request.use(
-  (config) => {
-    return config
+  (conf) => {
+    return conf
   },
   (error) => {
     return Promise.reject(error)
@@ -26,7 +26,10 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    error.response.status == 401 ? (window.location.href = '/') : ''
+    // error.response.status === 401 ? (window.location.href = '/') : ''
+    if (error.response.status === 401) {
+      window.location.href = '/'
+    }
     return Promise.reject(error)
   },
 )

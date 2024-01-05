@@ -1,20 +1,20 @@
 <template>
   <div
-    :class="
+    v-bind:class="
       category == selectedCategory ? 'text-purple-700 -translate-y-1' : ''
     "
     class="w-fit mt-2 hover:text-purple-700 transition ease-in-out delay-10 hover:-translate-y-1 hover:scale-110"
   >
     <input
+      v-bind:id="category"
       type="radio"
       name="category"
-      :id="category"
-      @click="selectCategory(category)"
       class="sr-only"
+      v-on:click="selectCategory(category)"
     />
-    <label :for="category">
+    <label v-bind:for="category">
       <div class="rounded-[6px] bg-slate-200 cursor-pointer">
-        <component :is="LOCALE_ICON[category]" class="w-16 h-16 p-1" />
+        <component v-bind:is="LOCALE_ICON[category]" class="w-16 h-16 p-1" />
       </div>
       <p class="font-medium mt-2 cursor-pointer">{{ category }}</p>
     </label>
@@ -22,6 +22,7 @@
 </template>
 <script setup>
 import { LOCALE_ICON } from '../../shared/utils/index'
+
 defineProps({
   category: String,
   selectedCategory: String,

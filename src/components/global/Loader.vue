@@ -5,5 +5,5 @@
   </div>
 </template>
 <script setup>
-import { LoadingIcon } from '../../assets/svg/index'
+import { LoadingIcon } from '../../assets/svg/index.jsx'
 </script>

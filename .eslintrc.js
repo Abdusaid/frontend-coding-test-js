@@ -18,12 +18,12 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
 
     // Disable the following rule, because it's not relevant for the tool chain and test envoirment.
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: [true],
-      },
-    ],
+    // 'import/no-extraneous-dependencies': [
+    //   'error',
+    //   {
+    //     devDependencies: [true],
+    //   },
+    // ],
 
     'vue/component-tags-order': [
       'error',

@@ -10,15 +10,15 @@
     class="flex flex-col justify-start relative bg-gray-200 m-2 w-[50%] max-[425px]:w-full cursor-pointer rounded-[8px] transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-104"
   >
     <SingleCard
-      :joke-text="jokesList.value"
-      :created-at="convertedDateTime(jokesList?.created_at)"
+      v-bind:joke-text="jokesList.value"
+      v-bind:created-at="convertedDateTime(jokesList?.created_at)"
     />
   </div>
   <div
-    v-else
-    class="flex flex-col justify-start relative bg-gray-200 m-2 p-2 w-[30%] max-[1024px]:w-[45%] max-[425px]:w-full cursor-pointer rounded-[8px] transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-104"
     v-for="joke in jokesList?.result"
-    :key="joke.id"
+    v-else
+    v-bind:key="joke.id"
+    class="flex flex-col justify-start relative bg-gray-200 m-2 p-2 w-[30%] max-[1024px]:w-[45%] max-[425px]:w-full cursor-pointer rounded-[8px] transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-104"
   >
     <p class="mb-2 text-start font-bold italic">{{ joke.value }}</p>
     <br />
@@ -31,11 +31,10 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { ApiChucknorris } from '../../shared/api/index'
-import { convertedDateTime } from '../../shared/utils/index'
+import { convertedDateTime, useToastService } from '../../shared/utils/index'
 import Loader from './Loader.vue'
 import EmptyCard from './EmptyCard.vue'
 import SingleCard from './SingleCard.vue'
-import { useToastService } from '../../shared/utils/index'
 
 const { showToast } = useToastService()
 const jokesList = ref()
@@ -44,13 +43,6 @@ const isLoading = ref(false)
 const props = defineProps({
   selectedCategory: String,
 })
-
-watch(
-  () => [props.selectedCategory],
-  () => {
-    getJoke()
-  },
-)
 
 const getJoke = async (isRandom = false) => {
   try {
@@ -70,6 +62,13 @@ const getJoke = async (isRandom = false) => {
     isLoading.value = false
   }
 }
+
+watch(
+  () => [props.selectedCategory],
+  () => {
+    getJoke()
+  },
+)
 
 defineExpose({ getJoke })
 </script>

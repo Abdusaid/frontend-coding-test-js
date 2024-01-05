@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import './styles/main.css'
-import App from './App.vue'
 import Toast from 'vue-toastification'
+import App from './App.vue'
 import 'vue-toastification/dist/index.css'
 
 import initializeRouter from './router'

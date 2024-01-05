@@ -15,6 +15,7 @@ const showToast = (message, options = {}) => {
   toastState.value(message, options)
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export const useToastService = () => {
   onMounted(initializeToast)
 

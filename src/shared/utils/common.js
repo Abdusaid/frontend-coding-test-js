@@ -15,7 +15,7 @@ import {
   ScienceIcon,
   SportIcon,
   TravelIcon,
-} from '../../assets/svg'
+} from '../../assets/svg/index.jsx'
 
 export const LOCALE_ICON = {
   animal: AnimalIcon,
