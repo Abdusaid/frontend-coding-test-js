@@ -53,7 +53,9 @@ import { RandomIcon } from '../assets/svg/index'
 import CategoriesList from '../components/global/CategoriesList.vue'
 import Loader from '../components/global/Loader.vue'
 import JokeCard from '../components/global/JokeCard.vue'
+import { useToastService } from '../shared/utils/index'
 
+const { showToast } = useToastService()
 const categories = ref([])
 const isLoading = ref(false)
 const selectedCategory = ref()
@@ -67,8 +69,14 @@ onMounted(async () => {
   try {
     isLoading.value = true
     categories.value = await ApiChucknorris.getCategories()
+    showToast('Successfully fetched categories!', {
+      type: 'success',
+      maxToasts: 4,
+      timeout: 2000,
+    })
   } catch (error) {
     console.log('Error')
+    showToast(`Error: ${error}`, { type: 'error' })
     isLoading.value = false
   } finally {
     isLoading.value = false

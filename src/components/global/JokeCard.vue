@@ -35,6 +35,9 @@ import { convertedDateTime } from '../../shared/utils/index'
 import Loader from './Loader.vue'
 import EmptyCard from './EmptyCard.vue'
 import SingleCard from './SingleCard.vue'
+import { useToastService } from '../../shared/utils/index'
+
+const { showToast } = useToastService()
 const jokesList = ref()
 const isLoading = ref(false)
 
@@ -55,9 +58,14 @@ const getJoke = async (isRandom = false) => {
     jokesList.value = isRandom
       ? await ApiChucknorris.getRandomJoke(props.selectedCategory)
       : await ApiChucknorris.getJoke(props.selectedCategory)
+    showToast('Fetched Jokes!', {
+      type: 'success',
+      maxToasts: 4,
+      timeout: 2000,
+    })
   } catch (error) {
-    console.log('Error')
     isLoading.value = false
+    showToast(`Error: ${error}`, { type: 'error' })
   } finally {
     isLoading.value = false
   }
