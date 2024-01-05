@@ -19,6 +19,7 @@
           v-for="category in categories"
           :key="category"
           :category="category"
+          :selectedCategory="selectedCategory"
           @onSetCategory="setCategory"
         />
       </div>
